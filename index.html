@@ -1,0 +1,119 @@
+<html>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <body>            
+		<div
+			id="playscreen"
+			style="z-index: 100; background-color: black; 
+				  position: absolute;
+				  top:0;
+				  left:0;
+				  height:100%;
+				  width: 100%;			
+				  display: flex;align-items: center;justify-content: center;flex-direction: column;
+		">
+			<div style="text-align: center">
+			<span style="color: white; font-size: 50px;">&bull; Please un-mute before beginning the performance &bull;</span><br/>
+			<span class="fa fa-play" style="color: white; font-size: 150px; cursor: pointer;"
+				onclick="
+					document.getElementById('playscreen').style.display = 'none';
+					var audio = new Audio('merka.mp3');
+					audio.play();
+				"
+			></span>
+			</div>
+		</div>
+	
+        <img src='jet.png' id="jet" style="position:absolute; top:100px; right: -100px; width: 100px; z-index: 3">        
+        <img src='jet.png' id="jet2" style="position:absolute; top:500px; left: -100px; width: 100px; z-index: 3; transform: scaleX(-1);">        
+    
+        <img src='liberty.png' class='liberty'>
+        <img src='liberty.png' class='liberty'>
+        <img src='liberty.png' class='liberty'>
+        <img src='liberty.png' class='liberty'>
+        <img src='liberty.png' class='liberty'>
+        <img src='liberty.png' class='liberty'>
+        <img src='liberty.png' class='liberty'>
+        
+        <span id='merka-text' class='float-text'></span>
+        
+        <div style="position: fixed; bottom: 0px; right: 0px;">
+            <span style="font-weight: 700; font-size: 40px; text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; color: white; margin-right: -40px; ">Brought to you by</span>
+            <img src='mcd.png' style="width: 200px; vertical-align:middle">
+        </div>
+        
+        <img src='firework.gif' style='position: fixed; top: 10px; right: 300px;'>
+        <img src='firework.gif' style='position: fixed; top: 10px; left: 300px;'>
+    </body>
+</html>
+
+
+<style>
+    body {
+        background-image: url('merka.gif');
+        overflow: hidden;
+    }
+    
+    .liberty {
+        top: 150px;
+        height: 60%;
+        position: relative;
+        animation-duration: 2s;
+        animation-name: rock;
+        animation-iteration-count: infinite;                
+        padding: 30px;
+    }
+    
+    audio {
+        display: none;
+    }
+    
+    @keyframes rock {
+        0% {
+            transform: rotate(-30deg);
+        }
+        50% {
+            transform: rotate(30deg);
+        }    
+        100% {
+            transform: rotate(-30deg);
+        }    
+    }
+    
+    .float-text {
+        position: fixed;        
+
+        left: 32%;        
+        font-size: 180px;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        color: blue;
+    }
+</style>
+
+<script src='jquery-3.1.1.min.js'></script>
+<script>
+    var showText = function (target, message, index, interval) {      
+      $(target).css('color', ['red', 'white', 'blue'][index % 3]);
+    
+      if (index < message.length) {
+        $(target).append(message[index++]);
+        setTimeout(function () { showText(target, message, index, interval); }, interval);
+      } else {
+        $(target).text('');        
+        setTimeout(function () { showText(target, message, 0, interval); }, interval);
+      }
+    }
+
+    $(function () {
+      showText("#merka-text", "MER'KA!", 0, 500);   
+    });
+
+    $(document).ready(function() {
+        $("#jet").delay(10000).animate({left: "-=2400", top:"+=200"}, 4000);
+        $("#jet2").delay(20000).animate({left: "+=2400", top:"+=200"}, 4000);
+        //$("#jet").animate({left: "-=300"}, 1000);
+    });
+</script>
